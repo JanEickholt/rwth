@@ -1,9 +1,0 @@
-move
-left
-read a
-left
-left
-left
-move
-left
-move
