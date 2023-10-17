@@ -1,41 +1,28 @@
-"""
-converts steps.txt to a list of steps
-instructions: left, right, pick, write {variable/"text"}, read {variable}
-"""
+moves = "mmmmplmmmlllm"
 
-with open("steps.txt") as f:
-    steps = f.readlines()
-    instructions = {}
+available_moves = {
+    "m": "move();",
+    "r": "turnRight();",
+    "l": "turnLeft();",
+    "p": "pickUp();"
+}
 
-    for idx, step in enumerate(steps):
-        step = step.strip()
-        if step == "left":
-            step = "turnLeft();"
-        elif step == "right":
-            step = "turnRight();"
-        elif step == "pick":
-            step = "pickUp();"
-        elif "write" in step:
-            step = 'write(' + step.split(" ")[1] + ');'
-        elif "read" in step:
-            print(f"""String {step.split(' ')[1]} = ""; """)
-            step = f'{step.split(" ")[1]} = read();'
-        else:
-            step += "();"
-        if step not in instructions:
-            instructions[step] = []
+move_dict = {}
+for idx, move in enumerate(moves):
+    idx = str(idx)
+    if move not in move_dict:
+        move_dict[move] = [idx]
+    else:
+        move_dict[move].append(idx)
 
-        instructions[step].append(idx)
+move_dict.pop("m")
 
+print(f"        for(int i = 0; i < {len(moves)}; i++) {'{'}")
+print(f"            switch(i) {'{'}")
 
-# Convert constructions to java if conditions
-for step in instructions:
-    instructions[step] = "    if (i == {}) {{\n\t    {}\n    }}".format(
-        " || i == ".join(map(str, instructions[step])), step)
+for k in move_dict:
+    print(f"""                case {": case ".join(move_dict[k])}: {'{\n                    '}{available_moves[k]}{'\n                    break;\n                }'}""")
 
-print(f"for (int i = 0; i < {len(steps)}; i++) {{")
-print("\n".join(instructions.values()))
-print("}")
-
-
-
+print("                default: move();")
+print("            }")
+print("        }")
