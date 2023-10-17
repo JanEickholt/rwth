@@ -7,20 +7,22 @@ public class MyDogbot extends Dogbot {
 		// Die Ausgabe von read() in diesem Raum ist entweder "L" oder "R"
 
 		// Dein Code hier:
-		String a = "";
+        String a = "";
 		for (int i = 0; i < 11; i++) {
-            if (i == 0 || i == 6 || i == 10) {
-        	    move();
+
+		    switch(i){
+		    case 2: {
+		        a = read();
+		        break;
+		    }
+		    case 1: case 3: case 4: case 5: case 7: case 8: case 9: {
+		        if(((i != 8) && (i != 9)) || a.equals("R") || a.equals("")){
+		            turnLeft();
+                }
+                break;
             }
-            if (i == 1 || i == 3 || i == 4 || i == 5 || i == 7 ||
-            (a.equals("R") && (i == 8))||
-            (a.equals("R") && (i == 9))) {
-        	    turnLeft();
-            }
-            if (i == 2) {
-        	    a = read();
-            }
-        }
+		    default: move();
+		    }
 
     }
 }

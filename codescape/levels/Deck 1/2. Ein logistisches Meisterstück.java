@@ -11,17 +11,21 @@ public class MyDogbot extends Dogbot {
         
         String a = "";
         for (int i = 0; i < 15; i++) {
-            if (i == 0 || i == 1 || i == 7 || i == 13 || i == 14) {
-        	    move();
+
+            switch(i){
+            case 2: case 4: case 5: case 6: case 8: case 10: case 11: case 12: {
+                turnLeft();
+                break;
             }
-            if (i == 2 || i == 4 || i == 5 || i == 6 || i == 8 || i == 10 || i == 11 || i == 12) {
-        	    turnLeft();
+            case 3: {
+                a = read();
+                break;
             }
-            if (i == 3) {
-        	    a = read();
+            case 9: {
+                write(a);
+                break;
             }
-            if (i == 9) {
-        	    write(a);
+            default: move();
             }
         }
 

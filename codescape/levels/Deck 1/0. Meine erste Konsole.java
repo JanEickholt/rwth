@@ -5,14 +5,17 @@ public class MyDogbot extends Dogbot {
 		// Passwort: activate
 
         for (int i = 0; i < 9; i++) {
-            if (i == 0 || i == 1 || i == 7 || i == 8) {
-        	    move();
+
+            switch(i){
+            case 2: case 4: case 5: case 6: {
+                turnLeft();
+                break;
             }
-            if (i == 2 || i == 4 || i == 5 || i == 6) {
-        	    turnLeft();
+            case 3: {
+                write("activate");
+                break;
             }
-            if (i == 3) {
-        	    write("activate");
+            default -> move();
             }
         }
 

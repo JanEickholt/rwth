@@ -4,14 +4,17 @@ public class MyDogbot extends Dogbot {
     public void run() {
 
         for (int i = 0; i < 12; i++) {
-            if (i == 0 || i == 1 || i == 3 || i == 4 || i == 8 || i == 10 || i == 11) {
-                move();
-            }
-            if (i == 2 || i == 6 || i == 7 || i == 9) {
+
+            switch(i){
+            case 2: case 6: case 7: case 9 {
                 turnRight();
+                break;
             }
-            if (i == 5) {
+            case 5: {
                 pickUp();
+                break;
+            }
+            default -> move();
             }
         }
 
