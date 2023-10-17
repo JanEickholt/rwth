@@ -1,10 +1,13 @@
-moves = "mmmmplmmmlllm"
+from move_interpreter import interpret
+moves = interpret("rrRrWrr")
 
 available_moves = {
     "m": "move();",
     "r": "turnRight();",
     "l": "turnLeft();",
-    "p": "pickUp();"
+    "p": "pickUp();",
+    "W": "write(a);",
+    "R": "a = read();"
 }
 
 move_dict = {}
@@ -16,6 +19,9 @@ for idx, move in enumerate(moves):
         move_dict[move].append(idx)
 
 move_dict.pop("m")
+
+if "R" in move_dict:
+    print('        String a = "";')
 
 print(f"        for(int i = 0; i < {len(moves)}; i++) {'{'}")
 print(f"            switch(i) {'{'}")
