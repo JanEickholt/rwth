@@ -4,8 +4,9 @@
 		move();
 		turnLeft();
 		String moves_arr = read();
+		for(int i = 0; i < 2; i++){
 		turnLeft();
-		turnLeft();
+		}
 		
 		String[] moves = moves_arr.split(",");
 		for(String i: moves){
